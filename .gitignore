@@ -1,0 +1,3 @@
+# Downloaded fp32 sources, the conversion venv, and validation strips.
+# Everything here is rebuildable by fetch.sh and none of it is served.
+.work/

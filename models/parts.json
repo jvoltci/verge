@@ -1,0 +1,10 @@
+{
+  "moebius/unet.onnx": {
+    "parts": 5,
+    "bytes": 459697235
+  },
+  "moebius/vae_decoder.onnx": {
+    "parts": 2,
+    "bytes": 101260614
+  }
+}
