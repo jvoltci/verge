@@ -42,6 +42,8 @@ import onnxruntime as ort
 from onnxconverter_common import float16
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import rewrite_einsum  # noqa: E402  (needs HERE on the path first)
 ROOT = os.path.dirname(HERE)
 SRC = os.path.join(ROOT, ".work", "moebius-fp32")
 DST = os.path.join(ROOT, "models", "moebius")
@@ -64,6 +66,16 @@ for name, keys in BLOCK.items():
 
     print(f"{name}: loading…", flush=True)
     model = onnx.load(src)
+
+    # The UNet's attention is rewritten out of Einsum first. Not an
+    # optimisation that can be skipped: fp16 Einsum has no WebGPU kernel at
+    # all, so leaving it in puts every attention node on the single-threaded
+    # CPU path and the browser spends 2.4s a step with the GPU idle. See
+    # rewrite_einsum.py, which proves each contraction against numpy before
+    # touching the graph.
+    if name == "unet":
+        model = rewrite_einsum.rewrite(model)
+
     blocked = [n.name for n in model.graph.node if any(k in n.name for k in keys)]
 
     print(f"{name}: converting, {len(blocked)} nodes kept fp32…", flush=True)
