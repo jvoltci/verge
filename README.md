@@ -1,10 +1,10 @@
 # verge
 
-Static assets for **[jvoltci.github.io/tools](https://jvoltci.github.io/tools)**, continued.
+Static assets for **[lognjais.github.io/tools](https://lognjais.github.io/tools)**, continued.
 
 There is no code here. Nothing is built. This repo is a bucket that GitHub Pages
 happens to serve, exactly like its older sibling
-[`edge`](https://github.com/jvoltci/edge).
+[`edge`](https://github.com/lognjais/edge).
 
 ## Why a second bucket
 
@@ -29,9 +29,9 @@ that promise is that no third party learns you opened it. GitHub serves every
 project site of a user from **one host**, so:
 
 ```
-jvoltci.github.io/tools/     the app
-jvoltci.github.io/edge/      weights
-jvoltci.github.io/verge/     weights, continued
+lognjais.github.io/tools/     the app
+lognjais.github.io/edge/      weights
+lognjais.github.io/verge/     weights, continued
 ```
 
 are all the **same origin**. No CORS boundary, no preflight, no third party — the
